@@ -1,6 +1,8 @@
 package xyz.cleangone.util;
 
 import org.apache.commons.codec.binary.Base64;
+import xyz.cleangone.util.env.EnvManager;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -51,8 +53,8 @@ public class Crypto
     {
         try
         {
-            ivParameterSpec = new IvParameterSpec(CleangoneEnv.IV_PARAM_KEY.getBytes("UTF-8"));
-            secretKeySpec = new SecretKeySpec(CleangoneEnv.SECRET_KEY.getBytes("UTF-8"), "AES");
+            ivParameterSpec = new IvParameterSpec(EnvManager.getEnv().getIvParamKey().getBytes("UTF-8"));
+            secretKeySpec = new SecretKeySpec(EnvManager.getEnv().getSecretKey().getBytes("UTF-8"), "AES");
             cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
         }
         catch (Exception e)
